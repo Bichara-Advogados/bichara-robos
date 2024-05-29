@@ -13,6 +13,48 @@ import openpyxl
 def new_func():
     pyautogui.press('backspace',presses=20)
 
+def printlongo():
+  pyautogui.keyDown('ctrl')
+  pyautogui.press('p')
+  pyautogui.keyUp('ctrl')
+  sleep(1)
+  #clicar em destino
+  pyautogui.click(1538,215)
+  sleep(0.5)
+  #clicar em guardar como PDF
+  pyautogui.click(1509,275)
+  sleep(0.5)
+  #clicar em guardar
+  pyautogui.click(1430,915)
+  sleep(0.5)
+  #apagar nome
+  new_func()
+  #Escreve a CDA
+  pyautogui.write('excluir')
+  #clicar em salvar
+  pyautogui.click(1137,567)
+  sleep(0.5)
+  #clicar em sim (caso tenha algo para substituir)
+  pyautogui.click(1041,531)
+
+def printcurto():
+  pyautogui.keyDown('ctrl')
+  pyautogui.press('p')
+  pyautogui.keyUp('ctrl')
+  sleep(1)
+  #clicar em guardar
+  pyautogui.click(1430,915)
+  sleep(0.5)
+  #apagar nome
+  new_func()
+  #Escreve a CDA
+  pyautogui.write(CDA)
+  #clicar em salvar
+  pyautogui.click(1137,567)
+  sleep(0.5)
+  #clicar em sim (caso tenha algo para substituir)
+  pyautogui.click(1041,531)
+
 # Configurar o caminho do ChromeDriver
 chrome_driver_path = r'C:\Users\suporte\Desktop\PSTs j&f jbs\chromedriver-win64\chromedriver.exe'
 
@@ -26,44 +68,25 @@ driver.get('https://www.dividaativa.pge.sp.gov.br/sc/pages/consultas/consultarDe
 
 primeiro_registro2 = True  # Variável para controlar o primeiro registro
 
-pyautogui.click(880,29)
-sleep(1)
+pyautogui.click(1235,43)
+sleep(2)
+pyautogui.click(1883,153)
 
 if primeiro_registro2:
-        pyautogui.keyDown('ctrl')
-        pyautogui.press('p')
-        pyautogui.keyUp('ctrl')
-        sleep(1)
-        #clicar em destino
-        pyautogui.click(1507,172)
-        sleep(1)
-        #clicar em guardar como PDF
-        pyautogui.click(1486,206)
-        sleep(1)
-        #clicar em guardar
-        pyautogui.click(1469,900)
-        sleep(1)
-        #apagar nome
-        new_func()
-        #Escreve a CDA
-        pyautogui.write('excluir')
-        #clicar em salvar
-        pyautogui.click(795,506)
-        sleep(1)
-        #clicar em sim (caso tenha algo para substituir)
-        pyautogui.click(1020,537)
-        primeiro_registro2 = False  # Defina como False após o primeiro registro 
+   printlongo()
+   primeiro_registro2 = False  # Defina como False após o primeiro registro 
+   sleep(1)
 
 # Nome do arquivo Excel e nome da planilha
-nome_arquivo_excel = r'C:\Users\suporte\Desktop\PSTs j&f jbs\API_CDA_IPVA2\Template_Ipva e Taxa_Judiciaria (2).xlsx'
-nome_planilha_excel = 'Débitos IPVA'
+nome_arquivo_excel = r'C:\Users\matheus.fonseca\Documents\Projeto Python\Planilhamento CDAs - 1503963-36.2019.8.26.0014.xlsx'
+nome_planilha_excel = 'Débitos IPVA SP - Pan Arre'
 
 # Carregar a planilha Excel
 workbook = openpyxl.load_workbook(nome_arquivo_excel)
 planilha = workbook[nome_planilha_excel]
 
 # Começando da linha 4, coluna 3 (C)
-start_row = 8594
+start_row = 4
 column_index = 3
 
 # Descobrir o número total de linhas na planilha
@@ -73,8 +96,6 @@ total_rows = planilha.max_row
 row = start_row  # Inicialize a variável row
 primeiro_registro = True  # Variável para controlar o primeiro registro
 
-
-
 while row <= total_rows:
     Num_CDA = planilha.cell(row=row, column=column_index).value
 
@@ -82,7 +103,6 @@ while row <= total_rows:
     if Num_CDA is None:
         print("Num_CDA está vazio. Saindo do loop.")
         break  # Sai do loop se Num_CDA estiver vazio
-
 
    # Digitar o CDA
     Campo_CDA = driver.find_element(By.XPATH, "//input[@id='consultaDebitoForm:decTxtTipoConsulta:cdaEtiqueta']")
@@ -108,23 +128,7 @@ while row <= total_rows:
 
     if "Nenhum resultado com os critérios de consulta" in resultado_msg:
         CDA = str(Num_CDA)
-        #Gerar PDF da Tela
-        pyautogui.keyDown('ctrl')
-        pyautogui.press('p')
-        pyautogui.keyUp('ctrl')
-        sleep(1)
-        #clicar em guardar
-        pyautogui.click(1469,900)
-        sleep(1)
-        #apagar nome
-        new_func()
-        #Escreve a CDA
-        pyautogui.write(CDA)
-        #clicar em salvar
-        pyautogui.click(795,506)
-        sleep(1)
-        #clicar em sim (caso tenha algo para substituir)
-        pyautogui.click(1020,537)
+        printcurto()
         row += 1  # Vá para a próxima linha e continue o loop
         continue
     # Consultar IPVA
@@ -257,24 +261,9 @@ while row <= total_rows:
     # Salve o arquivo Excel
     workbook.save(nome_arquivo_excel)
     CDA = str(Num_CDA)
-     #Gerar PDF da Tela
-    pyautogui.keyDown('ctrl')
-    pyautogui.press('p')
-    pyautogui.keyUp('ctrl')
-    sleep(1)
-    #clicar em guardar
-    pyautogui.click(1469,900)
-    sleep(1)
-    #apagar nome
-    new_func()
-    #Escreve a CDA
-    pyautogui.write(CDA)
-    #clicar em salvar
-    pyautogui.click(795,506)
-    sleep(1)
-    #clicar em sim (caso tenha algo para substituir)
-    pyautogui.click(1020,537)
-# Botão Voltar
+    printcurto()
+
+    # Botão Voltar
     wait = WebDriverWait(driver, 15)
     btn_Voltar = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@id='consultaDebitoForm:btnVoltarDetalheDebito']")))
     #driver.find_element(By.XPATH, "//input[@name='consultaDebitoForm:btnVoltarDetalheDebito']")

@@ -19,23 +19,23 @@ def printlongo():
   pyautogui.keyUp('ctrl')
   sleep(1)
   #clicar em destino
-  pyautogui.click(1538,215)
+  pyautogui.click(1461,229)
   sleep(0.5)
   #clicar em guardar como PDF
-  pyautogui.click(1509,275)
+  pyautogui.click(1376,271)
   sleep(0.5)
   #clicar em guardar
-  pyautogui.click(1430,915)
+  pyautogui.click(1434,908)
   sleep(0.5)
   #apagar nome
   new_func()
   #Escreve a CDA
   pyautogui.write('excluir')
   #clicar em salvar
-  pyautogui.click(1137,567)
+  pyautogui.click(696,741)
   sleep(0.5)
   #clicar em sim (caso tenha algo para substituir)
-  pyautogui.click(1041,531)
+  pyautogui.click(1020,527)
 
 def printcurto():
   pyautogui.keyDown('ctrl')
@@ -43,20 +43,17 @@ def printcurto():
   pyautogui.keyUp('ctrl')
   sleep(1)
   #clicar em guardar
-  pyautogui.click(1430,915)
+  pyautogui.click(1434,908)
   sleep(0.5)
   #apagar nome
   new_func()
   #Escreve a CDA
   pyautogui.write(CDA)
   #clicar em salvar
-  pyautogui.click(1137,567)
+  pyautogui.click(696,741)
   sleep(0.5)
   #clicar em sim (caso tenha algo para substituir)
-  pyautogui.click(1041,531)
-
-# Configurar o caminho do ChromeDriver
-chrome_driver_path = r'C:\Users\suporte\Desktop\PSTs j&f jbs\chromedriver-win64\chromedriver.exe'
+  pyautogui.click(1020,527)
 
 ## Configurando o caminho do executável como variável de ambiente
 chrome_driver_path = r'C:\Users\suporte\Desktop\PSTs j&f C:\Users\suporte\Desktop\PSTs j&f jbs\chromedriver-win64\chromedriver.exe'
@@ -68,9 +65,9 @@ driver.get('https://www.dividaativa.pge.sp.gov.br/sc/pages/consultas/consultarDe
 
 primeiro_registro2 = True  # Variável para controlar o primeiro registro
 
-pyautogui.click(1235,43)
-sleep(2)
-pyautogui.click(1883,153)
+pyautogui.click(1235,43) #Clicar para expandir o chrome
+sleep(5)
+pyautogui.click(1883,153) #Clicar para fechar a notificação de barra de tarefas
 
 if primeiro_registro2:
    printlongo()
@@ -78,15 +75,15 @@ if primeiro_registro2:
    sleep(1)
 
 # Nome do arquivo Excel e nome da planilha
-nome_arquivo_excel = r'C:\Users\matheus.fonseca\Documents\Projeto Python\Planilhamento CDAs - 1503963-36.2019.8.26.0014.xlsx'
-nome_planilha_excel = 'Débitos IPVA SP - Pan Arre'
+nome_arquivo_excel = r'C:\Users\suporte\Desktop\Rõbo MDU\bichara-robos\Demanda 0159.xlsx'
+nome_planilha_excel = 'Débitos IPVA'
 
 # Carregar a planilha Excel
 workbook = openpyxl.load_workbook(nome_arquivo_excel)
 planilha = workbook[nome_planilha_excel]
 
 # Começando da linha 4, coluna 3 (C)
-start_row = 4
+start_row = 660
 column_index = 3
 
 # Descobrir o número total de linhas na planilha

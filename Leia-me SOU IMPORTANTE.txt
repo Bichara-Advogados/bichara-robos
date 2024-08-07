@@ -1,0 +1,8 @@
+
+Configurações nessecárias para seu computador rodar os robôs com perfeição, sem a necessidade de realizar a alteração
+das coordenadas do PyAutoGUI.
+
+1- Sempre rodar o robô na tela maior (Tela da DELL)
+2- Usar a escala em 125%
+3- Usar a resolução em 1920 x 1080
+4- Usar o zoom do ChromeDrive em 100%
